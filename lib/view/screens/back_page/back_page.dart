@@ -11,15 +11,42 @@ import '../../widgets/select_lang_button.dart';
 import '../../widgets/suqare_button_widget.dart';
 import '../../widgets/text_form_widget.dart';
 
-class BackPage extends StatelessWidget {
+class BackPage extends StatefulWidget {
   BackPage({Key? key}) : super(key: key);
+
+  @override
+  State<BackPage> createState() => _BackPageState();
+}
+
+class _BackPageState extends State<BackPage> with SingleTickerProviderStateMixin{
+
+late AnimationController _controller;
+late Animation _profilePictureAnimation;
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _loginEditController = TextEditingController();
   final TextEditingController _passwordEditController = TextEditingController();
   final FocusNode _loginFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  List<String> dropdownItems = ["Andijon", "Namangan", "Farg'ona"];
+
+@override
+void initState() {
+  _controller = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+  _profilePictureAnimation = Tween(begin: 0.0, end: 400.0).animate(
+      CurvedAnimation(parent: _controller,
+          curve: const Interval(0.0, 0.20, curve: Curves.easeOut)));
+  _controller.forward();
+  _controller.addListener(() {
+    setState(() {});
+  });
+  super.initState();
+}
+
+@override
+void dispose() {
+  _controller.dispose();
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +99,23 @@ class BackPage extends StatelessWidget {
                         margin: EdgeInsets.only(top: ctx.h * 0.014),
                         child: Row(
                           children: [
-                            AppText(
-                                text: 'Markaziy klinik shifoxonasi',
-                                color: ColorConst.beginColor,
-                                size: ctx.w * 0.028,
-                                fontWidget: FontWeight.w700),
+                            ShaderMask(
+                              shaderCallback: (bounds) => LinearGradient(
+                                colors: [ColorConst.beginColor, ColorConst.endColor],
+                              ).createShader(bounds),
+                              child: Text(
+                                'Markaziy klinik shifoxonasi',
+                                style: TextStyle(
+                                    fontSize: ctx.w * 0.028,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
                             Image.asset(
                               "assets/dropdownIcon.png",
                               width: ctx.w * 0.023,
                               height: ctx.h * 0.032,
-                              color: ColorConst.beginColor,
+                              color: ColorConst.endColor,
                             ),
                           ],
                         ),
@@ -109,29 +143,39 @@ class BackPage extends StatelessWidget {
           height: ctx.h * 0.016,
           decoration: BoxDecoration(
               gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              ColorConst.beginColor,
-              ColorConst.endColor,
-            ],
-          )),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  ColorConst.beginColor,
+                  ColorConst.endColor,
+                ],
+              )),
         ),
       ),
       Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: ctx.h * 0.064),
-            child: const Center(
-              child: AnimationWidget(
-                message: 'Login or password uncorrect!',
+          const SizedBox(height: 48),
+          Center(
+            child: GestureDetector(
+              onTap: (){
+                _controller.reverse();
+              },
+              child: Container(
+                width: _profilePictureAnimation.value,
+                height: ctx.h*0.12,
+                decoration:  BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child:  Center(
+                  child: AppText(text:"Login or password uncorrect!",color: Colors.white,size: context.h*0.024,fontWidget: FontWeight.w400,),
+                ),
               ),
             ),
           ),
-          const SizedBox()
         ],
-      )
+      ),
+      const SizedBox()
     ]);
   }
 

@@ -32,15 +32,17 @@ class _AnimationWidgetState extends State<AnimationWidget>  with SingleTickerPro
       onTap: (){
         _controller.reverse();
       },
-      child: Container(
-        width: _profilePictureAnimation.value,
-        height: 88,
-        decoration:  BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(8)
-        ),
-        child:  Center(
-          child: AppText(text: widget.message,color: Colors.white,size: context.h*0.024,fontWidget: FontWeight.w400,),
+      child: Center(
+        child: Container(
+          width: _profilePictureAnimation.value,
+          height: 88,
+          decoration:  BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(8)
+          ),
+          child:  Center(
+            child: AppText(text: widget.message,color: Colors.white,size: context.h*0.024,fontWidget: FontWeight.w400,),
+          ),
         ),
       ),
     );
