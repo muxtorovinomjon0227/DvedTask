@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 class AuthViewModel extends ChangeNotifier{
  bool isChecked = false;
  bool isVisibilityPassword = false;
- String value = "Andijon";
+ String value = "";
+ bool isAnimation = true;
+ bool isOpenMenu = false;
 
  checkboxChanged(bool value) {
   isChecked = value;
@@ -16,6 +18,16 @@ class AuthViewModel extends ChangeNotifier{
 
  selectCountry(String value){
   this.value = value;
+  isAnimation = false;
+  notifyListeners();
+ }
+
+ closeAnimation(){
+  isAnimation = false;
+  notifyListeners();
+ }
+ openMenu(){
+  isOpenMenu = !isOpenMenu;
   notifyListeners();
  }
 
