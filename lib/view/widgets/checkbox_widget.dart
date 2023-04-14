@@ -1,9 +1,7 @@
 import 'package:dved_task/core/extension/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../core/constants/color_const.dart';
-import '../../core/constants/fonts_const.dart';
 import '../../view_model/login_view_model.dart';
 import 'app_text_widget.dart';
 
