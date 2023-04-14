@@ -12,15 +12,41 @@ import '../../widgets/select_lang_button.dart';
 import '../../widgets/suqare_button_widget.dart';
 import '../../widgets/text_form_widget.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin{
+
+  late AnimationController _controller;
+  late Animation _profilePictureAnimation;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _loginEditController = TextEditingController();
   final TextEditingController _passwordEditController = TextEditingController();
   final FocusNode _loginFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    _profilePictureAnimation = Tween(begin: 0.0, end: 400.0).animate(
+        CurvedAnimation(parent: _controller,
+            curve: const Interval(0.0, 0.20, curve: Curves.easeOut)));
+    _controller.forward();
+    _controller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,19 +138,30 @@ class LoginPage extends StatelessWidget {
           )),
         ),
       ),
-      !ctx.watch<AuthViewModel>().isAnimation
+      ctx.watch<AuthViewModel>().isAnimation
           ?   Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: ctx.h * 0.064),
-            child: const Center(
-              child: AnimationWidget(
-                message: 'Select company!',
+          const SizedBox(height: 48),
+          Center(
+            child: GestureDetector(
+              onTap: (){
+                _controller.reverse();
+              },
+              child: Container(
+                width: _profilePictureAnimation.value,
+                height: ctx.h*0.12,
+                decoration:  BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child:  Center(
+                  child: AppText(text:"Select company!",
+                    color: Colors.white,size: context.h*0.024,
+                    fontWidget: FontWeight.w400,),
+                ),
               ),
             ),
           ),
-          const SizedBox()
         ],
       )
           : const SizedBox()
@@ -215,6 +252,4 @@ class LoginPage extends StatelessWidget {
       ],
     );
   }
-
-
 }
