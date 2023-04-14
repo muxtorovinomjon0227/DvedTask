@@ -20,7 +20,10 @@ class SelectLanguage extends StatelessWidget {
             margin: EdgeInsets.only(top: context.h*0.016),
             child: Row(
               children: [
-                Image.asset(Utils.assetsImagePath[3]),
+                SizedBox(
+                  width: context.w*0.019,
+                    height: context.h*0.026,
+                    child: Image.asset(Utils.assetsImagePath[3])),
                 const SizedBox(width: 8),
                 ShaderMask(
                   shaderCallback: (bounds) =>  LinearGradient(
@@ -28,7 +31,7 @@ class SelectLanguage extends StatelessWidget {
                   ).createShader(bounds),
                   child:  Text('English',
                     style: TextStyle(
-                        fontSize: SizeConst.kMediumFont16,
+                        fontSize: context.h*0.021,
                         color: Colors.white,
                         fontWeight: FontWeight.w400
                     ),

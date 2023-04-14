@@ -1,3 +1,4 @@
+import 'package:dved_task/core/extension/context_extensions.dart';
 import 'package:dved_task/view/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -48,22 +49,22 @@ class DropDownButtonWidget extends StatelessWidget {
       child: Stack(
         children: [
            Positioned(
-            top: 8,
-              left: 12,
-              child: AppText(text: collectionText ?? "",size: 10,color: ColorConst.contentTextColor,)),
+               top: context.h*0.01,
+               left: context.w*0.016,
+              child: AppText(text: collectionText ?? "",size: context.h*0.014,color: ColorConst.contentTextColor,)),
           Padding(
-            padding: const EdgeInsets.only(left: 20,top: 13),
+            padding:  EdgeInsets.only(left: context.w*0.026,top: context.h*0.017),
             child: DropdownButton(
               icon:  Container(
-                margin: const EdgeInsets.only(right: 16),
-                  child: Image.asset("assets/dropdownIcon.png",width: 24,height: 24,)),
+                margin:  EdgeInsets.only(right: context.w*0.015),
+                  child: Image.asset("assets/dropdownIcon.png",width: context.w*0.023,height: context.h*032,)),
               isExpanded: true,
               underline: const SizedBox(),
               value: value.toString(),
               style: Theme.of(context).textTheme.subtitle2!.copyWith(
                 color: inputTextColor ?? ColorConst.bigTextColor,
                 fontWeight: fontWeight ?? FontWeight.w400,
-                fontSize: fontSize ?? 16,
+                fontSize: fontSize ?? context.h*0.021,
               ),
               items: List.generate(
                   regionLIst.length,
