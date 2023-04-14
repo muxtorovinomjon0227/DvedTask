@@ -57,7 +57,7 @@ class DropDownButtonWidget extends StatelessWidget {
             child: DropdownButton(
               icon:  Container(
                 margin:  EdgeInsets.only(right: context.w*0.015),
-                  child: Image.asset("assets/dropdownIcon.png",width: context.w*0.023,height: context.h*032,)),
+                  child: Image.asset("assets/dropdownIcon.png",width: context.w*0.023,height: context.h*0.032,)),
               isExpanded: true,
               underline: const SizedBox(),
               value: value.toString(),
