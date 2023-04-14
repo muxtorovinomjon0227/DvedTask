@@ -28,50 +28,72 @@ class LoginPage extends StatelessWidget {
     );
   }
   Widget _buildAppLogo(BuildContext ctx){
-    return  Row(
-    children: [
-      const AppLogo(),
-      SizedBox(
-        width: ctx.w*0.5,
-        height: ctx.h*1,
-        child: Container(
-          margin: EdgeInsets.only(left: ctx.w*0.046, right: ctx.w*0.046),
-          child: Column(
-           children: [
-            const SelectLanguage(),
-             Row(
-               children: [
-                 Container(
-                     margin: EdgeInsets.only(top: ctx.h*0.114),
-                     child: AppText(text: 'Log in',
-                       color: ColorConst.bigTextColor,
-                       size: ctx.h*0.043,
-                       fontWidget: FontWeight.w700),),
-               ],
-             ),
-             Row(
-               children: [
-                 Container(
-                     margin: EdgeInsets.only(top: ctx.h*0.016),
-                     child: AppText(text: 'Please login to access your account.',
-                       color: ColorConst.contentTextColor,
-                       size: ctx.h*0.021,
-                       fontWidget: FontWeight.w400),),
-               ],
-             ),
-             textFormFiled(ctx),
-             SizedBox(height: ctx.h*0.035),
-             const CheckboxWidget(),
-             SizedBox(height: ctx.h*0.035),
-             squareButton(ctx),
-             SizedBox(height: ctx.h*0.054),
-             sendRequest(ctx),
-           ],
+    return  Stack(
+      children:[
+        Row(
+      children: [
+        const AppLogo(),
+        SizedBox(
+          width: ctx.w*0.5,
+          height: ctx.h*1,
+          child: Container(
+            margin: EdgeInsets.only(left: ctx.w*0.046, right: ctx.w*0.046),
+            child: Column(
+             children: [
+              const SelectLanguage(),
+               Row(
+                 children: [
+                   Container(
+                       margin: EdgeInsets.only(top: ctx.h*0.114),
+                       child: AppText(text: 'Log in',
+                         color: ColorConst.bigTextColor,
+                         size: ctx.h*0.043,
+                         fontWidget: FontWeight.w700),),
+                 ],
+               ),
+               Row(
+                 children: [
+                   Container(
+                       margin: EdgeInsets.only(top: ctx.h*0.016),
+                       child: AppText(text: 'Please login to access your account.',
+                         color: ColorConst.contentTextColor,
+                         size: ctx.h*0.021,
+                         fontWidget: FontWeight.w400),),
+                 ],
+               ),
+               textFormFiled(ctx),
+               SizedBox(height: ctx.h*0.035),
+               const CheckboxWidget(),
+               SizedBox(height: ctx.h*0.035),
+               squareButton(ctx),
+               SizedBox(height: ctx.h*0.054),
+               sendRequest(ctx),
+             ],
+            ),
+          ),
+        )
+      ],
+        ),
+        Positioned(
+          left: ctx.w*0.4746,
+          top: ctx.h*0.9166,
+          child: Container(
+            width: ctx.w*0.05,
+            height: ctx.h*0.016,
+            decoration:  BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    ColorConst.beginColor,
+                    ColorConst.endColor,
+                  ],
+                )
+            ),
           ),
         ),
-      )
-    ],
-      );
+      ]
+    );
   }
 
   Widget textFormFiled(BuildContext ctx){
@@ -131,6 +153,7 @@ class LoginPage extends StatelessWidget {
       wight: ctx.w*0.56,
       function: () async {
         // if (_formKey.currentState!.validate()) {}
+        Navigator.pushNamed(ctx, '/back_page');
       },
       enable: false,
     );
