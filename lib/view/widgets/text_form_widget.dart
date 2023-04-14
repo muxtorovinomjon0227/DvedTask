@@ -1,4 +1,7 @@
+import 'package:dved_task/core/extension/context_extensions.dart';
+import 'package:dved_task/view_model/login_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constants/color_const.dart';
 import 'app_text_widget.dart';
@@ -61,29 +64,28 @@ class TextFormFiledWidget extends StatelessWidget {
       child: Stack(
         children:[
           Positioned(
-              top: 8,
-              left: 12,
-              child: AppText(text: collectionText ?? "",size: 10,color: ColorConst.contentTextColor,)),
+              top: context.h*0.01,
+              left: context.w*0.016,
+              child: AppText(text: collectionText ?? "",size: context.h*0.014,color: ColorConst.contentTextColor,)),
           Padding(
-            padding: const EdgeInsets.only(left: 20,top: 13),
+            padding:  EdgeInsets.only(left: context.w*0.026,top: context.h*0.016),
           child: TextFormField(
             keyboardType: textInputType,
             obscureText: obscureText ?? false,
             cursorColor: cursorColor ?? ColorConst.bigTextColor,
-            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            style: TextStyle(
               color: inputTextColor ?? ColorConst.bigTextColor,
               fontWeight: fontWeight ?? FontWeight.w400,
-              fontSize: fontSize ?? 16,
+              fontSize: fontSize ?? context.h*0.021,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 1, color: Colors.white),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
                 suffixIcon: InkWell(
                   onTap: function,
-                  child: suffixIcon ?? const SizedBox(),
+                  child: Padding(
+                    padding:  EdgeInsets.only(right: context.w*0.02),
+                    child: suffixIcon ?? const SizedBox(),
+                  ),
                 ) ,
                 hintText: hindText
             ),
