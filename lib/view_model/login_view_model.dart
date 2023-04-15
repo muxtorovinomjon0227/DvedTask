@@ -1,3 +1,6 @@
+
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthViewModel extends ChangeNotifier{
@@ -28,6 +31,11 @@ class AuthViewModel extends ChangeNotifier{
  }
  openMenu(){
   isOpenMenu = !isOpenMenu;
+  notifyListeners();
+ }
+
+ selectLang(BuildContext context, locale){
+  context.setLocale(locale);
   notifyListeners();
  }
 
